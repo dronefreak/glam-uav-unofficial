@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glam-uav-unofficial"
+version = "0.1.0"
+description = "Unofficial PyTorch reimplementation of GLAM-UAV (10.3390/s25061786)"
+requires-python = ">=3.9"
+dependencies = ["torch>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pre-commit>=3.5", "ruff>=0.15", "docformatter>=1.7"]
+
+[tool.setuptools]
+packages = ["glam_uav"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+# Mirrors the CABiNet .flake8 select/ignore, plus I (import sorting).
+select = ["E", "F", "W", "B", "I", "UP"]
+ignore = [
+    "E501",  # line length is the formatter's job
+    "E722",  # bare except (kept from the reference config)
+    "E741",  # ambiguous variable names (l, I, O) — common in math code
+    "B006",  # mutable default arg — false-positives on nn defaults
+    "B008",  # function call in default arg
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+
+[tool.ruff.format]
+# black-compatible defaults (88 cols); keep docstring code samples untouched.
+docstring-code-format = false
+
+[tool.docformatter]
+# Tidy quote style, indentation and PEP 257 summary/description layout, and reflow
+# prose to 88 cols. The indented equation blocks in the model docstrings are treated
+# as pre-formatted and left untouched.
+in-place = true
+wrap-summaries = 88
+wrap-descriptions = 88
+pre-summary-newline = false

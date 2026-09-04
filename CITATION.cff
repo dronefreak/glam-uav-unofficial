@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: >-
+  This repository is an UNOFFICIAL third-party reimplementation. Please DO NOT cite this
+  repository. Cite the original paper (preferred-citation below).
+title: "Unofficial PyTorch reimplementation of GLAM-UAV"
+type: software
+authors:
+  - name: "oss-reimpl contributors"
+repository-code: "https://github.com/REPLACE_ME/glam-uav-unofficial"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "UAV Imagery Real-Time Semantic Segmentation with Global–Local Information Attention"
+  authors:
+    - family-names: "Zhang"
+      given-names: "Zikang"
+    - family-names: "Li"
+      given-names: "Gongquan"
+  year: 2025
+  journal: "Sensors"
+  doi: "10.3390/s25061786"
+  url: "https://www.mdpi.com/1424-8220/25/6/1786"
