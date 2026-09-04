@@ -1,5 +1,5 @@
 """
-GLAM-UAV — UAV Imagery Real-Time Semantic Segmentation with Global-Local Information
+GLAM-UAV: UAV Imagery Real-Time Semantic Segmentation with Global-Local Information
 Attention  (Sensors 2025, 25(6), 1786).  https://doi.org/10.3390/s25061786
 
 *** UNOFFICIAL reimplementation from the paper (Fig 2-4, Eq 1-13). No code was released. ***
@@ -17,7 +17,7 @@ Verified against the full paper:
   - Training target: plain cross-entropy, UAVid 8 classes, 1024x1024 crops.
   - Reported: 12.1 M params, 48.24 GFLOPs, 72.4 FPS @ 1024^2 (RTX 3090).
 
-Underspecified in the paper (choices here — may differ from the authors' model):
+Underspecified in the paper (choices here; may differ from the authors' model):
   - Decoder channel widths: never tabulated. The whole decoder is only ~0.9 M params
     (12.1 M total - 11.2 M for ResNet18), so GLAM cannot run at 256/512; here f4 is
     1x1-reduced to 128 and the decoder runs at 128 / 128 / 64 (s32 / s16 / s8).
@@ -194,7 +194,7 @@ class SLFM(nn.Module):
 class GLAMUAV(nn.Module):
     """UNet-style: ResNet18 encoder + (3x GLAM + SLFM) decoder.
 
-    ~11.8 M params (paper 12.1 M); decoder runs at 128 / 128 / 64 — see module
+    ~11.8 M params (paper 12.1 M); decoder runs at 128 / 128 / 64; see module
     docstring.
     """
 

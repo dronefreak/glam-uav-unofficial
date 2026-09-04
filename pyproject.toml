@@ -25,8 +25,8 @@ select = ["E", "F", "W", "B", "I", "UP"]
 ignore = [
     "E501",  # line length is the formatter's job
     "E722",  # bare except (kept from the reference config)
-    "E741",  # ambiguous variable names (l, I, O) — common in math code
-    "B006",  # mutable default arg — false-positives on nn defaults
+    "E741",  # ambiguous variable names (l, I, O), common in math code
+    "B006",  # mutable default arg, false-positives on nn defaults
     "B008",  # function call in default arg
 ]
 

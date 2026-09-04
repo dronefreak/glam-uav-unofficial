@@ -1,4 +1,4 @@
-# Pre-commit hooks — basic code hygiene only (mirrors the CABiNet reference,
+# Pre-commit hooks: basic code hygiene only (mirrors the CABiNet reference,
 # minus mypy / bandit / prettier). See https://pre-commit.com
 #
 #   pip install pre-commit        # or: pip install -e ".[dev]"

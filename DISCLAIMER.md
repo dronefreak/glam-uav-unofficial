@@ -11,8 +11,8 @@ This is an **unofficial, third-party reimplementation** of *UAV Imagery Real-Tim
   reasonable choices were made (see `README.md` → "What is faithful / what is a guess").
 - The reported TRT-FP16 latency / parameter counts in this repo are from random-init models
   and are **indicative only**.
-- If the original authors release code, **defer to it.** Issues and PRs with corrections —
-  especially from the authors — are welcome. Open an issue and I will take this down or
+- If the original authors release code, **defer to it.** Issues and PRs with corrections,
+  especially from the authors, are welcome. Open an issue and I will take this down or
   redirect it on request.
 
 Reimplementation code: Apache-2.0 (see `LICENSE`). The original paper is the authors' work

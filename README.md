@@ -1,14 +1,14 @@
-# GLAM-UAV — unofficial PyTorch reimplementation
+# GLAM-UAV: unofficial PyTorch reimplementation
 
 > ⚠️ **Unofficial. Not affiliated with the authors. No trained weights (random init).** See [`DISCLAIMER.md`](DISCLAIMER.md).
 
 A single-file, dependency-light (`torch` only) reimplementation of:
 
 **UAV Imagery Real-Time Semantic Segmentation with Global–Local Information Attention**
-Zikang Zhang, Gongquan Li — *Sensors 2025, 25(6), 1786* — doi:[10.3390/s25061786](https://doi.org/10.3390/s25061786)
+Zikang Zhang, Gongquan Li. *Sensors 2025, 25(6), 1786*. doi:[10.3390/s25061786](https://doi.org/10.3390/s25061786)
 → [paper](https://www.mdpi.com/1424-8220/25/6/1786)
 
-Intended for latency / parameter benchmarking and as a starting point for training —
+Intended for latency / parameter benchmarking and as a starting point for training.
 train it to get the paper's accuracy (no weights included).
 
 ## Install
@@ -35,7 +35,7 @@ Smoke test: `python test_forward.py` · ONNX export: `python export_onnx.py --he
 
 **Confidence: Medium–High.** The full paper (text + Fig. 2–4 + Eq. 1–13) was worked through
 page by page. The encoder and the two named modules are implemented as specified; the only
-free choices are the decoder widths (and those are tightly bounded — see below).
+free choices are the decoder widths (and those are tightly bounded; see below).
 
 **Implemented as specified in the paper:**
 - **Encoder:** ResNet-18, four stages at strides 4 / 8 / 16 / 32 (64 / 128 / 256 / 512 ch).
@@ -44,7 +44,7 @@ free choices are the decoder widths (and those are tightly bounded — see below
   sigmoid gates → `Y = X ⊙ W_x ⊙ W_y`. **Channel-preserving** (it is a reweighting of `X`).
 - **GLAM local branch** (Eq. 7–9): `A = BN(Conv3×3(X))`, `B = BN(Conv1×1(X))`, `Z = A + B`.
 - **GLAM fusion** (Eq. 10): `Out = BN(DWConv3×3(Y + Z))`. GLAM as a whole preserves the
-  channel count — it does **not** reduce channels.
+  channel count; it does **not** reduce channels.
 - **SLFM** (Fig. 4): align encoder stages 1–4 to stride-4; per-scale channel descriptor
   `Sigmoid(1×1(GAP(·)))`; softmax across the four scales; weighted sum; 1×1 conv → fused
   feature. Added into the top decoder level.
@@ -57,7 +57,7 @@ free choices are the decoder widths (and those are tightly bounded — see below
   ~0.9 M params (12.1 M total − 11.2 M for ResNet-18), which rules out running GLAM at
   256/512. Here `f4` is 1×1-reduced to 128 and the decoder runs at **128 / 128 / 64**
   (s32 / s16 / s8). Result: **11.79 M params** vs the paper's 12.1 M.
-- **Skip fusion** is done as concat + 1×1 (UNet-style — the paper says only "the most
+- **Skip fusion** is done as concat + 1×1 (UNet-style; the paper says only "the most
   straightforward connection operation"); plain addition is an equally valid reading.
 - A trailing ReLU is kept after the Eq.-10 fusion for trainability (Eq. 10 itself is BN only).
 - CoordAttention reduction ratio `r = 32` (the CVPR-2021 default; the paper says only `C/r`).
@@ -80,7 +80,7 @@ implementation's configuration; accuracy requires training on UAVid (or UDD6 / L
 
 ## Development
 
-Code style is kept tidy with [pre-commit](https://pre-commit.com) hooks — `ruff`
+Code style is kept tidy with [pre-commit](https://pre-commit.com) hooks: `ruff`
 (lint + format) and `docformatter`, plus the standard whitespace / YAML / merge-conflict
 checks. Config: [`.pre-commit-config.yaml`](.pre-commit-config.yaml) + `[tool.ruff]` /
 `[tool.docformatter]` in [`pyproject.toml`](pyproject.toml).
